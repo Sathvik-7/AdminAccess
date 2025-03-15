@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using System.Text;
 using System.Text.Json.Serialization;
 
@@ -97,19 +98,24 @@ namespace BackEnd
                 });
                 options.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement{
                    {
-            new OpenApiSecurityScheme
+                        new OpenApiSecurityScheme
+                        {
+                            Name = "Bearer",
+                            In = ParameterLocation.Header,
+                            Reference = new OpenApiReference
+                            {
+                                Id = "Bearer",
+                                Type = ReferenceType.SecurityScheme
+                            }
+                    },
+                    new List<string>()
+                   }
+                });
+            });
+
+            builder.Host.UseSerilog((context, configuration) =>
             {
-                Name = "Bearer",
-                In = ParameterLocation.Header,
-                Reference = new OpenApiReference
-                {
-                    Id = "Bearer",
-                    Type = ReferenceType.SecurityScheme
-                }
-            },
-            new List<string>()
-        }
-    });
+                configuration.ReadFrom.Configuration(context.Configuration);
             });
 
             var app = builder.Build();
