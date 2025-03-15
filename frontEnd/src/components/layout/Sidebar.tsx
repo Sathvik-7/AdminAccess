@@ -13,6 +13,8 @@ const Sidebar = () => {
     navigate(url);
   };
 
+  const handleRoles = (role: string): boolean => user?.roles?.includes(role) ?? false;
+
   return (
     <div className='shrink-0 bg-[#754eb4] w-60 p-2 min-h-[calc(100vh-48px)] flex flex-col items-stretch gap-8'>
       <div className='self-center flex flex-col items-center'>
@@ -21,7 +23,6 @@ const Sidebar = () => {
           {user?.firstName} {user?.lastName}
         </h4>
       </div>
-
       <Button
         label='Users Management'
         onClick={() => handleClick(PATH_DASHBOARD.usersManagement)}
@@ -49,15 +50,14 @@ const Sidebar = () => {
       />
       <Button label='My Logs' onClick={() => handleClick(PATH_DASHBOARD.myLogs)} type='button' variant='secondary' />
       <hr />
-      <Button label='Owner Page' onClick={() => handleClick(PATH_DASHBOARD.owner)} type='button' variant='secondary' />
-      <Button label='Admin Page' onClick={() => handleClick(PATH_DASHBOARD.admin)} type='button' variant='secondary' />
-      <Button
-        label='Manager Page'
-        onClick={() => handleClick(PATH_DASHBOARD.manager)}
-        type='button'
-        variant='secondary'
-      />
-      <Button label='User Page' onClick={() => handleClick(PATH_DASHBOARD.user)} type='button' variant='secondary' />
+      {handleRoles('OWNER') && ( <Button label='Owner Page' onClick={() => handleClick(PATH_DASHBOARD.owner)} type='button' variant='secondary' />)}
+
+      {handleRoles('ADMIN') && (<Button label='Admin Page' onClick={() => handleClick(PATH_DASHBOARD.admin)} type='button' variant='secondary' />)}
+      
+      {handleRoles('MANAGER') && (<Button label='Manager Page' onClick={() => handleClick(PATH_DASHBOARD.manager)} type='button' variant='secondary'/>)}
+      
+      {handleRoles('USER') && (<Button label='User Page' onClick={() => handleClick(PATH_DASHBOARD.user)} type='button' variant='secondary' />)}
+   
     </div>
   );
 };
