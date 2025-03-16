@@ -50,14 +50,10 @@ const Sidebar = () => {
       />
       <Button label='My Logs' onClick={() => handleClick(PATH_DASHBOARD.myLogs)} type='button' variant='secondary' />
       <hr />
-      {handleRoles('OWNER') && ( <Button label='Owner Page' onClick={() => handleClick(PATH_DASHBOARD.owner)} type='button' variant='secondary' />)}
-
-      {handleRoles('ADMIN') && (<Button label='Admin Page' onClick={() => handleClick(PATH_DASHBOARD.admin)} type='button' variant='secondary' />)}
-      
-      {handleRoles('MANAGER') && (<Button label='Manager Page' onClick={() => handleClick(PATH_DASHBOARD.manager)} type='button' variant='secondary'/>)}
-      
-      {handleRoles('USER') && (<Button label='User Page' onClick={() => handleClick(PATH_DASHBOARD.user)} type='button' variant='secondary' />)}
-   
+      <Button label='Owner Page' onClick={() => handleClick(PATH_DASHBOARD.owner)} type='button' variant='secondary' />
+      <Button label='Admin Page' onClick={() => handleClick(PATH_DASHBOARD.admin)} type='button' variant='secondary' />
+      <Button label='Manager Page' onClick={() => handleClick(PATH_DASHBOARD.manager)} type='button' variant='secondary'/>
+      <Button label='User Page' onClick={() => handleClick(PATH_DASHBOARD.user)} type='button' variant='secondary' />   
     </div>
   );
 };

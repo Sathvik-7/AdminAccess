@@ -55,7 +55,7 @@ const Header = () => {
               type='button'
               variant='light'
             />
-            <Button label='Logout' onClick={() => navigate(PATH_PUBLIC.login)} type='button' variant='light' />
+            <Button label='Logout' onClick={logout} type='button' variant='light' />
           </div>
         ) : (
           <div className='flex items-center gap-2'>
